@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
   <bpmn:process id="orderPizza" name="Order Pizza" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Order received">
+    <bpmn:startEvent id="StartEvent_1" name="Order received" camunda:formKey="app:placeorder.jsf">
       <bpmn:outgoing>SequenceFlow_06atmu2</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_06atmu2" sourceRef="StartEvent_1" targetRef="ServiceTask_0lrmoed" />
