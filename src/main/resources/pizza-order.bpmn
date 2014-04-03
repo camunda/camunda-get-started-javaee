@@ -38,7 +38,7 @@
       <bpmn:incoming>SequenceFlow_0yiiw0c</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0yiiw0c" sourceRef="ServiceTask_1w32ybd" targetRef="EndEvent_064cd62" />
-    <bpmn:serviceTask id="ServiceTask_1w32ybd" name="Send Rejection Email" camunda:expression="${true}">
+    <bpmn:serviceTask id="ServiceTask_1w32ybd" name="Send Rejection Email" camunda:expression="${orderBusinessLogic.rejectOrder(execution)}">
       <bpmn:incoming>SequenceFlow_0md4bjf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yiiw0c</bpmn:outgoing>
     </bpmn:serviceTask>
