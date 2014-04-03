@@ -26,6 +26,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Stateless
 @Named
@@ -38,6 +40,8 @@ public class OrderBusinessLogic {
   // Inject task form available through the camunda cdi artifact
   @Inject
   private TaskForm taskForm;
+
+  private static Logger LOGGER = Logger.getLogger(OrderBusinessLogic.class.getName());
 
   public void persistOrder(DelegateExecution delegateExecution) {
     // Create new order instance
@@ -82,6 +86,11 @@ public class OrderBusinessLogic {
       // Rollback both transactions on error
       throw new RuntimeException("Cannot complete task", e);
     }
+  }
+
+  public void rejectOrder(DelegateExecution delegateExecution) {
+    OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+    LOGGER.log(Level.INFO, "\n\n\nSending Email:\nDear {0}, your order {1} of a {2} pizza has been rejected.\n\n\n", new String[]{order.getCustomer(), String.valueOf(order.getId()), order.getPizza()});
   }
 
 }
