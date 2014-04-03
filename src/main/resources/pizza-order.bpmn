@@ -10,7 +10,7 @@
       <bpmn:outgoing>SequenceFlow_08ax6yk</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_08ax6yk" sourceRef="ServiceTask_0lrmoed" targetRef="UserTask_0b3v36h" />
-    <bpmn:userTask id="UserTask_0b3v36h" name="Approve Order">
+    <bpmn:userTask id="UserTask_0b3v36h" name="Approve Order" camunda:formKey="app:approveorder.jsf">
       <bpmn:incoming>SequenceFlow_08ax6yk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_14w7jxd</bpmn:outgoing>
     </bpmn:userTask>
@@ -21,14 +21,14 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_14w7jxd" sourceRef="UserTask_0b3v36h" targetRef="ExclusiveGateway_07926wc" />
     <bpmn:sequenceFlow id="SequenceFlow_10r7cva" name="Yes" sourceRef="ExclusiveGateway_07926wc" targetRef="UserTask_19diw18">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_1ccb1zj" name="Pizza prepared">
       <bpmn:incoming>SequenceFlow_1mcsbs4</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1mcsbs4" sourceRef="UserTask_19diw18" targetRef="EndEvent_1ccb1zj" />
     <bpmn:sequenceFlow id="SequenceFlow_0md4bjf" name="No" sourceRef="ExclusiveGateway_07926wc" targetRef="ServiceTask_1w32ybd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="UserTask_19diw18" name="Prepare Pizza">
       <bpmn:incoming>SequenceFlow_10r7cva</bpmn:incoming>
