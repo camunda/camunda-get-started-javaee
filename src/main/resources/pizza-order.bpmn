@@ -30,7 +30,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0md4bjf" name="No" sourceRef="ExclusiveGateway_07926wc" targetRef="ServiceTask_1w32ybd">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="UserTask_19diw18" name="Prepare Pizza">
+    <bpmn:userTask id="UserTask_19diw18" name="Prepare Pizza" camunda:formKey="app:preparepizza.jsf">
       <bpmn:incoming>SequenceFlow_10r7cva</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1mcsbs4</bpmn:outgoing>
     </bpmn:userTask>
